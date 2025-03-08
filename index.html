@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Layout</title>
+    <script src="products.js"></script>
+    <script src="script.js"></script>
+
+    <script src="emailService.js"></script>
+    <style>
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 5fr; 
+    background-color: #1A1A1A;
+
+    
+}
+
+/* Fix logo positioning */
+.Logo {
+        background-color: #1a1919; 
+        grid-row: 1 / 1;
+        grid-column: 1 / 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 8vh;
+        width: 31.5vh;
+}
+
+.MainPage {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4vh; /* Ensures text scales with button */
+        border: 0.15em solid #232D34; /* Scales with font size */
+}
+
+.MainPage h1 {
+        font-size: 5vh; /* Scale with height */
+}
+
+/* Fix TopBar shifting */
+.TopBar {
+        background-color: #1a1919; 
+        grid-row: 1 / 1;
+        grid-column: 2 / 3;
+        display:flex ; 
+        flex-direction:row;
+        align-items: center;
+        justify-content: space-between;
+        padding:0vh / 2vh ;
+        width: 100%; /* Ensures it spans the entire column */
+        height: 8vh;
+        max-width:100 ;
+        max-height: 8vh;
+}
+
+/* Fix Sidebar */
+.SideBar {
+        background-color: #181818; 
+        grid-row: 2 / 3;
+        grid-column: 1 / 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 31.5vh;
+        min-width: 31.5vh;
+        max-height: 92vh;
+        min-height: 92vh;
+
+}
+
+/* Fix Viewer */
+.Viewer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(308px, 1fr)); 
+    gap: 15px; /* Spacing between items */
+    background-color: #1A1A1A;
+    padding: 15px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 1rem;
+    justify-content: center; /* Centers the grid */
+
+}
+
+/* Fix Search Bar */
+.Search_Bar {
+        width: 60%;
+        height: 50%;
+        font-size: 1.5vw;
+        border-radius: 1vw;
+        font-size: 2vh; /* Scales with viewport */
+        border: 0.05em solid #232D34; /* Scales with font size */
+        padding-left: 1%;
+        margin-left: 1%;
+        background-color: #1C1C1C;
+        color: #ffffff;
+}
+
+/* Fix button spacing issue */
+
+
+.Category_Button {
+        width: 95%;
+        height: 6vh;
+        font-size: 2.5vh; /* Scales with button height */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        border: 0.1em solid #232D34; /* Scales with font size */
+}
+
+.Category_Button h3 {
+        font-size: 2vh; /* Ensures text scales with button */
+        white-space: nowrap;
+        margin: 0;
+}   
+
+.product {
+    background-color: #1c1c1c;
+    color: white;
+    border: 1px solid #333;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: 300px; /* Allow grid to define width */
+    max-width: 300px; /* Ensures uniform width */
+    height: 425px;
+    max-height: 425px;
+
+}
+.Clickable_Image{
+    max-width: 280px;
+    max-height: 280px;
+}
+
+.quantity-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.quantity-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 48%; /* Take up 1/2 of the available space */
+    color: white;
+}
+
+.add-to-cart {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 48%; /* Take up 1/2 of the available space */
+}
+
+.add-to-cart:hover {
+    background-color: #0056b3;
+}
+
+button {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    background-color: #1A1A1A;
+    border: 1px solid #232D34;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: white;
+}
+
+button:hover {
+    background-color: #1A1A1A;
+}
+.add-to-cart:hover {
+    background-color: #0056b3;
+}
+.NavButtonDiv {
+    height:6vh;
+    width: 6vw;
+    padding-right: -0vw;
+}
+.BasketButton {
+    aspect-ratio: 1 / 1;
+    height: 3vw;
+    width: 3vw;
+
+}
+.Quantity-Controls-Basket{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    width: 20%;
+    padding-right: 10px;
+}
+.Item-Details{
+     display: grid;
+     flex-direction: row;
+     grid-template-rows: 1fr 3fr;
+     width: 50%;
+     height: 90%;
+     max-height: 90%;
+}
+
+.BasketText{
+    font-size: 2vh; /* Scales based on viewport width */
+    white-space: nowrap; /* Prevents text from wrapping */ 
+    color: white;
+}
+.BasketChangeQuantityButton{
+    width: 7vh;
+    max-width: 7vh;
+    height: 7vh;
+    max-height: 7vh ;
+    font-size: 2vh;
+}
+.BasketChangeQuantityText{
+    font-size: 3vh;
+    color: white;
+}
+
+
+.BasketTotalPrice{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    grid-template-columns: 1fr 5fr;
+    width: 50vw;
+    height: 15vh;
+    box-sizing: border-box;
+    border: 1px solid #232D34; /* Scales with font size */
+}
+.Basket-Item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    grid-template-columns: 1fr 5fr;
+    width: 50vw;
+    height: 15vh;
+    box-sizing: border-box;
+    border: 1px solid #232D34;
+}
+.Basket_Item_Container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    grid-template-columns: 1fr 5fr;
+    width: 50vw;
+    height: 15vh;
+    box-sizing: border-box;
+    border: 1px solid #232D34; /* Scales with font size */
+}
+.Basket_Image
+{
+    max-width: 10vw;
+    max-height: 10vw;
+}
+.Basket_Viewer{
+    display: grid;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 1rem;
+    row-gap: 10px;
+    max-height: 15vh;
+    height:15vh ;
+}
+.WhiteText{
+    color:white;
+}
+.ProductPrice{
+    color: white;
+}
+.ProductName{
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
+.Product_Viewer {
+    margin-top: 25px;
+    width: 60vw;
+    min-height: 20vh;
+    max-height: 80vh;
+    background-color: #1c1c1c;
+    color: white;
+    border-radius: 5px;
+    position: relative; /* Ensure the shadow expands properly */
+    box-shadow: 0 0 0 25px #1c1c1c; /* Expands the border outward by 10px */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    padding-right: 15vh;
+}
+
+.Product_Details {
+        display: flex;
+        gap: 20px;
+        width: 60vw;
+        height: 90vh;
+}
+.Product_Images {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 80vh;
+        width: 50vw;
+}
+.Thumbnail {
+        display: flex;
+        gap: 5px;
+        margin-top: 10px;
+        max-width: 5vh;
+        width: 5vh;
+        height: 5vh;
+        max-height: 5vh;
+        border: 0.1rem solid #232D34;
+}
+.ThumbnailsHolder {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(7vh, 1fr)); /* Creates rows dynamically */
+    gap: 0px;
+    max-width: 35vh;
+    width: 35vh;
+    height: 10vh;
+    max-height: 10vh;
+    overflow: hidden;
+    padding-left: 3vh;
+}
+ .thumbnails img {
+        width: 10vh;
+        max-width: 10vh;
+        height: 10vh;
+        max-height: 10vh;
+        cursor: pointer;
+}
+.Product_Info {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 40vw;
+        max-height: 80vh;
+        color: #ffffff;
+}
+.Add_To_Cart_Product{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.ImageControl {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    padding-right: 15vh;
+}
+
+.ImageControlButtonPrevious, .ImageControlButtonNext {
+    background-color: #55555500;
+    color: white;
+    font-size: 50px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    height: 60px;
+    width: 60px;
+    max-width: 60px;
+    max-height: 60px;
+    border-radius: 5px;
+    margin-bottom: 25px;
+    aspect-ratio: 1 / 1;
+}
+
+.mainImage {
+    max-width: 35vh;
+    max-height: 35vh;
+    width: 35vh;
+    height: 35vh;
+    padding-left: 1vh;
+    aspect-ratio: 1 / 1;
+    border: 0.1rem solid #232D34;
+}
+
+
+.Quantity_Controls_ProductPage {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 20%; /* Take up 1/2 of the available space */
+    color: white;
+}
+
+.ProductPageQuantityContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    
+}
+
+
+
+
+.BasketReceipt {
+    background: #22222200;
+    color: rgb(255, 255, 255);
+    width: 50vw;
+    height: 15vh;
+}
+
+.ReceiptTable {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: transparent !important; /* Or set to a solid color */
+    filter: none !important;
+    text-shadow: none !important;
+    opacity: 1 !important;
+}
+
+.ReceiptTable td {
+    padding: 15px;
+    border-bottom: 1px solid #232D34;
+    font-size: 2vh;
+}
+.ReceiptTable td:nth-child(3) {
+    
+    text-align: right;
+    font-size: 2vh;
+    padding-right: calc(5vw + 10px); /* Pushes the price slightly away from the right edge */
+}
+.ReceiptTable td:nth-child(2) {
+    text-align: left;
+    padding-left: -20vw; /* Adjust spacing */
+    font-size: 2vh;
+}
+.ReceiptFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #232D34;
+    max-height: 40px;
+    height: 40px;
+}
+
+.PayButton {
+    background: #007BFF;
+    color: white;
+    padding:15px;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+    max-height: 45px;
+    height: 45px;
+    font-size: 2vh;
+    
+}
+.PayTotalText{
+    color: white;
+    padding-right: 5vw;
+    font-size: 2vh;
+    max-height: 30px;
+    height: 30px;
+}
+.Basket-Item-Pay{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    grid-template-columns: 1fr 5fr;
+    width: 50vw;
+    box-sizing: border-box;
+    border: 1px solid #232D34; 
+}
+
+.EmptyBasketMessage {
+    text-align: center;
+    font-size: 50px;
+    color: gray;
+    padding: 10px;
+}
+
+
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+input {
+    width: 100%;
+    padding: 10px;
+    background: #333; /* Dark input background */
+    border: 1px solid #555; /* Subtle border */
+    color: white;
+    border-radius: 5px;
+    outline: none;
+}
+
+
+.modal-content {
+    position: relative;
+    background-color: #14171a;
+    color: white;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 50%;
+    text-align: center;
+    max-height: 90vh; /* Prevents overflow beyond viewport */
+    overflow-y: auto; /* Enables scrolling if content exceeds max height */
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+
+}
+
+.modal-content input {
+    width: 90%;
+    padding: 10px;
+    margin: 5px ;
+    border: 1px solid #272626;
+    border-radius: 5px;
+}
+
+.card-details {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-details div {
+    width: 48%;
+}
+
+.button {
+    background-color: #1D72B8;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.Submit_Button{
+    background-color: #0056b3;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+    
+}
+
+
+
+
+</style>
+</head>
+<body>
+    <div class="TopBar">
+        <input type="text" class="Search_Bar" id="Search_Bar" placeholder="Vyhľadávanie">  
+        <div class="NavButtonDiv">
+            <button class="BasketButton" id ="BasketButton", onclick="GoToCart()">
+            
+            </button>
+        </div>
+    </div>
+    </div>
+    <div class="SideBar">
+
+        <button class="Category_Button", onclick="loadProducts('Procesory')">
+            <h3 style="color: white; margin: 0;">Procesory</h3>
+        </button>
+        <button class="Category_Button", onclick="loadProducts('Grafické_Karty')">
+            <h3 style="color: white; margin: 0;">Grafické Karty</h3>
+        </button>
+        <button class="Category_Button", onclick="loadProducts('PC_Zdroje')">
+            <h3 style="color: white; margin: 0;">PC Zdroje</h3>
+        </button>
+        <button class="Category_Button", onclick="loadProducts('Počítačové_Skrine')">
+            <h3 style="color: white; margin: 0;">Počítačové skrine</h3>
+        </button>
+        <button class="Category_Button", onclick="loadProducts('RAMky')">
+            <h3 style="color: white; margin: 0;">RAMky</h3>
+        </button>
+        <button class="Category_Button", onclick="loadProducts('Chladiče')">
+            <h3 style="color: white; margin: 0;">Chladiče</h3>
+        </button>
+        <button class="Category_Button", onclick="loadProducts('Úložiská')">
+            <h3 style="color: white; margin: 0;">Úložiská</h3>
+        </button>
+        <button class="Category_Button", onclick="loadProducts('Ventilátory')">
+            <h3 style="color: white; margin: 0;">Ventilátory</h3>
+        </button>
+        <button class="Category_Button", onclick="loadProducts('Tlačiarne')">
+            <h3 style="color: white; margin: 0;">Tlačiarne</h3>
+        </button>
+        <button class="Category_Button", onclick="loadProducts('Monitory')">
+            <h3 style="color: white; margin: 0;">Monitory</h3>
+        </button>
+        <button class="Category_Button", onclick="loadProducts('Reproduktory')">
+            <h3 style="color: white; margin: 0;">Reproduktory</h3>
+        </button>
+        <button class="Category_Button", onclick="loadProducts('Počítačové_Myši')">
+            <h3 style="color: white; margin: 0;">Počítačové myši</h3>
+        </button>
+        <button class="Category_Button", onclick="loadProducts('Slúchadlá')">
+            <h3 style="color: white; margin: 0;">Slúchadlá</h3>
+        </button>
+        <button class="Category_Button", onclick="loadProducts('Klávesnice')">
+            <h3 style="color: white; margin: 0;">Klávesnice</h3>
+        </button>
+        <button class="Category_Button", onclick="loadProducts('Mikrofóny')">
+            <h3 style="color: white; margin: 0;">Mikrofóny</h3>
+        </button>
+        <button class="Category_Button", onclick="loadProducts('Telefóny')">
+            <h3 style="color: white; margin: 0;">Telefóny</h3>
+        </button>
+        <button class="Category_Button", onclick="loadProducts('Tablety')">
+            <h3 style="color: white; margin: 0;">Tablety</h3>
+        </button>
+        <button class="Category_Button", onclick="loadProducts('PowerBanky')">
+            <h3 style="color: white; margin: 0;">PowerBanky</h3>
+        </button>
+        <button class="Category_Button", onclick="loadProducts('Notebooky')">
+            <h3 style="color: white; margin: 0;">Notebooky</h3>
+        </button>
+        <button class="Category_Button", onclick="loadProducts('Routery')">
+            <h3 style="color: white; margin: 0;">Routery</h3>
+        </button>
+        <button class="Category_Button", onclick="loadProducts('Kamery')">
+            <h3 style="color: white; margin: 0;">Kamery</h3>
+        </button>
+        <button class="Category_Button", onclick="loadProducts('Káble')">
+            <h3 style="color: white; margin: 0;">Káble</h3>
+        </button>
+        <button class="Category_Button", onclick="loadProducts('Počítačové_Príslušenstvo')">
+            <h3 style="color: white; margin: 0;">Počítačové príslušenstvo</h3>
+        </button>
+        <button class="Category_Button", onclick="loadProducts('Notebookove_Príslušenstvo')">
+            <h3 style="color: white; margin: 0;">Notebookove príslušenstvo</h3>
+        </button>
+        <button onclick="send()">Complete Purchase</button>
+
+    </div>
+    <div id="Viewer" class="Viewer">
+
+    </div>
+
+    <div id ="ModalDiv" class="ModalDiv">
+
+    </div>
+    <div class="Logo",onclick= "loadProducts('Default_Page')">
+        <button class="MainPage">
+            <h1 style="color: white; margin: 0;">Logo</h1>
+        </button>
+    </div>
+</body>
+</html>
